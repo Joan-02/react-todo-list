@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  width: 100%;
 }
 
 .logo {
@@ -39,4 +40,32 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.add-task {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  text-align: center;
+  justify-content: center;
+}
+
+.add-task input {
+  flex-grow: 1;
+  border-radius: 8px;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  border: 1px solid grey;
+  border-radius: 8px;
+  justify-content: space-between;
+  padding: 8px;
+  margin-bottom: 14px;
+  gap: 24px;
+}
+
+.task input {
+  margin-right: 14px;
 }
