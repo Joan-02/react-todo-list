@@ -3,6 +3,7 @@ import './App.css'
 interface Task {
   text: string;
   isCompleted: boolean;
+  id: number;
 }
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
   console.log(taskText);
 
   const handleTask = () => {
-    setTask([...tasks, { text: taskText, isCompleted: false}]);
+    setTask([...tasks, { text: taskText, isCompleted: false, id: Date.now()}]);
     setTaskText('');
   };
 
@@ -36,7 +37,7 @@ function App() {
                 <input type="checkbox" checked={task.isCompleted}/>
                 <span>{task.text}</span>
               </div>
-              <button>Eliminar</button>
+              <button className='eliminar-task'>Eliminar</button>
             </div>
           );
         })};
