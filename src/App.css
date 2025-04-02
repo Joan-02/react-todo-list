@@ -69,3 +69,7 @@
 .task input {
   margin-right: 14px;
 }
+
+.completed {
+  text-decoration: line-through;
+}
