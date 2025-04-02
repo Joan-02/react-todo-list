@@ -1,13 +1,9 @@
 import { useState } from "react";
 import "./App.css";
-interface Task {
-  text: string;
-  isCompleted: boolean;
-  id: number;
-}
+import { Task } from "./components/task";
 
 function App() {
-  const [tasks, setTask] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [taskText, setTaskText] = useState("");
 
   const handleText = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,16 +13,19 @@ function App() {
   console.log(taskText);
 
   const handleTask = () => {
-    setTask([...tasks, { text: taskText, isCompleted: false, id: Date.now() }]);
+    setTasks([
+      ...tasks,
+      { text: taskText, isCompleted: false, id: Date.now() },
+    ]);
     setTaskText("");
   };
 
   const handleDelete = (id: number) => {
-    setTask(tasks.filter((task) => task.id !== id));
+    setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  const handleCheckbox = (id: number) => {
-    setTask(
+  const handleCheckboxChange = (id: number) => {
+    setTasks(
       tasks.map((task) =>
         task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
       )
@@ -43,24 +42,13 @@ function App() {
       <div className="task-list">
         {tasks.map((task) => {
           return (
-            <div className="task">
-              <div>
-                <input
-                  type="checkbox"
-                  checked={task.isCompleted}
-                  onChange={() => handleCheckbox(task.id)}
-                />
-                <span className={task.isCompleted ? "completed" : ""}>
-                  {task.text}
-                </span>
-              </div>
-              <button
-                className="eliminar-task"
-                onClick={() => handleDelete(task.id)}
-              >
-                Eliminar
-              </button>
-            </div>
+            <Task
+              id={task.id}
+              text={task.text}
+              isCompleted={task.isCompleted}
+              onDelete={handleDelete}
+              onCheckboxChange={handleCheckboxChange}
+            />
           );
         })}
       </div>
