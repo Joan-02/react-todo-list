@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./App.css";
 import { TaskList } from "./components/TaskList";
 import { TaskForm } from "./components/TaskForm";
-
 export interface TaskType {
   id: number;
   text: string;
