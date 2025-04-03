@@ -1,9 +1,16 @@
 import { useState } from "react";
 import "./App.css";
-import { Task } from "./components/task";
+import { TaskList } from "./components/TaskList";
+import { TaskForm } from "./components/TaskForm";
+
+export interface TaskType {
+  id: number;
+  text: string;
+  isCompleted: boolean;
+}
 
 function App() {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<TaskType[]>([]);
   const [taskText, setTaskText] = useState("");
 
   const handleText = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,23 +42,12 @@ function App() {
   return (
     <>
       <h1>ToDo List</h1>
-      <div className="add-task">
-        <input type="text" onChange={handleText} value={taskText} />
-        <button onClick={handleTask}>Add Task</button>
-      </div>
-      <div className="task-list">
-        {tasks.map((task) => {
-          return (
-            <Task
-              id={task.id}
-              text={task.text}
-              isCompleted={task.isCompleted}
-              onDelete={handleDelete}
-              onCheckboxChange={handleCheckboxChange}
-            />
-          );
-        })}
-      </div>
+      <TaskForm onChange={handleText} onClick={handleTask} value={taskText} />
+      <TaskList
+        tasks={tasks}
+        onDelete={handleDelete}
+        onCheckboxChange={handleCheckboxChange}
+      />
     </>
   );
 }
